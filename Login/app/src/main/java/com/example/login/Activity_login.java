@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Activity_login extends AppCompatActivity {
@@ -71,7 +72,9 @@ public class Activity_login extends AppCompatActivity {
     }
 
     private void loginFail() {
+        showCustomDialog();
         Toast.makeText(this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+
 
     }
 
@@ -80,6 +83,22 @@ public class Activity_login extends AppCompatActivity {
         Intent intent = new Intent(Activity_login.this, HomeActivity.class);
         startActivity(intent);
         finish();
+    }
+    private void showCustomDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("提示");
+        builder.setMessage("请先注册账号");
+        builder.setPositiveButton("确定",(dialog,which)->{
+            Intent intent = new Intent(Activity_login.this, RegisterActivity.class);
+            startActivity(intent);
+        });
+        builder.setNegativeButton("取消", (dialog, which) -> {
+            dialog.dismiss();
+
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show(); 
+
     }
 
 
